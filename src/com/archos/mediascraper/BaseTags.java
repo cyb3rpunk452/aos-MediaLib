@@ -65,6 +65,11 @@ public abstract class BaseTags implements Parcelable {
     protected String mTitle;
     protected float mRating;
     protected String mPlot;
+
+    //r
+    protected String mTagline;
+
+    protected int mVoteCount;
     protected final Map<String, String> mActors;
     protected String mActorsFormatted;
     protected SpannableString mSpannableActorsFormatted;
@@ -78,6 +83,8 @@ public abstract class BaseTags implements Parcelable {
     protected long mLastPlayedMs;
     protected long mBookmark;
     protected long mResume;
+
+
 
     public BaseTags() {
         mDirectors = new LinkedList<String>();
@@ -107,6 +114,11 @@ public abstract class BaseTags implements Parcelable {
     public String getPlot() { return mPlot; }
     public float getRating() { return mRating; }
     public String getTitle() { return mTitle; }
+
+    //r
+    public String getTagline() { return mTagline; }
+
+    public int getVoteCount() { return mVoteCount; }
     public String getStorageName() { return mTitle; }
     public List<ScraperImage> getPosters() { return mPosters; }
     public ScraperImage getDefaultPoster() { return getFirst(mPosters); }
@@ -339,6 +351,14 @@ public abstract class BaseTags implements Parcelable {
     public void addDirectorIfAbsent(String director, char... splitCharacters) {
         addIfAbsentSplitNTrim(director, mDirectors, splitCharacters);
     }
+//
+//    public void addProducerIfAbsent(String producer, char... splitCharacters) {
+//        addIfAbsentSplitNTrim(producer, mDirectors, splitCharacters);
+//    }
+//
+//    public void addWriterIfAbsent(String director, char... splitCharacters) {
+//        addIfAbsentSplitNTrim(director, mDirectors, splitCharacters);
+//    }
 
     public abstract void setCover(File file);
 
@@ -347,7 +367,12 @@ public abstract class BaseTags implements Parcelable {
     public void setVideoId(long id) { mVideoId = id; }
     public void setPlot(String plot) { mPlot = plot; }
     public void setRating(float rating) { mRating = rating; }
+    public void setVoteCount(int voteCount) { mVoteCount = voteCount; }
     public void setTitle(String title) { mTitle = title; }
+
+    //r
+    public void setTagline(String tagline) { mTagline = tagline; }
+
     public void setPosters(List<ScraperImage> list) { mPosters = list; }
     public void setBackdrops(List<ScraperImage> list) { mBackdrops = list; }
     public void setActorsFormatted(String actors) { mActorsFormatted = actors; }
@@ -388,6 +413,9 @@ public abstract class BaseTags implements Parcelable {
         in.readMap(mActors, LinkedHashMap.class.getClassLoader());
         in.readStringList(mDirectors);
         mFile = Uri.parse(in.readString());
+
+        //r
+        mTagline = in.readString();
     }
 
     public void writeToParcel(Parcel out, int flags) {
@@ -398,6 +426,9 @@ public abstract class BaseTags implements Parcelable {
         out.writeMap(mActors);
         out.writeStringList(mDirectors);
         out.writeString(mFile!=null?mFile.toString():"");
+
+        //r
+        out.writeString(mTagline);
     }
 
     /**

@@ -57,6 +57,9 @@ public final class ScraperStore {
         /** studios preformatted */
         public static final String STUDIOS_FORMATTED = "m_studios";
 
+        //r
+        public static final String TAGLINE = "m_tagline";
+
         public static class URI {
             public static final Uri BASE = Uri.parse(CONTENT_AUTHORITY + "/tags/movie");
             public static final Uri ALL = Uri.parse(CONTENT_AUTHORITY + "/tags/movies");
@@ -183,6 +186,10 @@ public final class ScraperStore {
         public static final String MOVIE_OR_SHOW_BACKDROP = "backdrop";
         public static final String MOVIE_OR_SHOW_BACKDROP_URL = "backdrop_url";
         public static final String MOVIE_OR_SHOW_PLOT = "plot";
+
+        //r
+        public static final String MOVIE_OR_SHOW_TAGLINE = "tagline";
+
         public static final String EPISODE_PLOT = "plot_episode";
 
         public static class URI {
@@ -198,6 +205,9 @@ public final class ScraperStore {
         public static final String EPISODE_IDS = "episode_ids";
         public static final String VIDEO_IDS = "video_ids";
         public static final String EPISODE_COUNT = "episode_count";
+
+        //r
+        public static final String SEASON_TAGLINE = "season_tagline";
 
         public static class URI {
             public static final Uri ALL = Uri.parse(CONTENT_AUTHORITY + "/tags/seasons");
@@ -225,6 +235,9 @@ public final class ScraperStore {
         public static final String ACTORS_FORMATTED = "e_actors";
         /** directors preformatted */
         public static final String DIRECTORS_FORMATTED = "e_directors";
+
+        //r
+        public static final String EPISODE_TAGLINE = "episode_tagline";
 
         public static class URI {
             public static final Uri BASE = Uri.parse(CONTENT_AUTHORITY + "/tags/episode");

@@ -165,6 +165,11 @@ public class DefaultContentScraper extends BaseScraper2 {
             MovieIdDescription.addDescription(movieId, tag, jff);
         }
 
+        //r
+        if (tag.getTagline() == null) {
+            MovieIdDescription.addDescription(movieId, tag, jff);
+        }
+
         return new ScrapeDetailResult(tag, true, null, ScrapeStatus.OKAY, null);
     }
 

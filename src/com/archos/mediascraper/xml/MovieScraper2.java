@@ -124,6 +124,11 @@ public class MovieScraper2 extends BaseScraper2 {
             MovieIdDescription.addDescription(movieId, tag, jff);
         }
 
+        //r
+        if (tag.getTagline() == null) {
+            MovieIdDescription.addDescription(movieId, tag, jff);
+        }
+
         tag.downloadPoster(mContext);
         return new ScrapeDetailResult(tag, true, null, ScrapeStatus.OKAY, null);
     }

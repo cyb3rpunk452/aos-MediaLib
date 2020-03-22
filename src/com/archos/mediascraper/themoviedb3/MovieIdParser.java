@@ -19,10 +19,15 @@ import android.util.JsonReader;
 import com.archos.mediascraper.MovieTags;
 import com.archos.mediascraper.StringMatcher;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 
 public class MovieIdParser extends JSONStreamParser<MovieTags, Void> {
+
 
     public static final MovieIdParser getInstance() {
         return INSTANCE;
@@ -56,6 +61,10 @@ public class MovieIdParser extends JSONStreamParser<MovieTags, Void> {
     private static final int KEY_ISO_3166 = 17;
     private static final int KEY_CERTIFICATION = 18;
 
+    //r
+    private static final int KEY_TAGLINE = 20;
+    //private static final int KEY_VOTE_COUNT = 21;
+
     static {
         MATCHER.addKey("id", KEY_ID);
         MATCHER.addKey("name", KEY_NAME);
@@ -80,11 +89,17 @@ public class MovieIdParser extends JSONStreamParser<MovieTags, Void> {
         MATCHER.addKey("countries", KEY_COUNTRIES);
         MATCHER.addKey("iso_3166_1", KEY_ISO_3166);
         MATCHER.addKey("certification", KEY_CERTIFICATION);
+
+        //r
+        //MATCHER.addKey("tagline",KEY_TAGLINE);
+       // MATCHER.addKey("vote_count",KEY_VOTE_COUNT);
     }
 
     private static final String COUNTRY_US = "US";
 
     private static final String DIRECTOR = "Director";
+   // private static final String PRODUCER = "Producer";
+   // private static final String WRITER = "Writer";
 
     @Override
     protected MovieTags getResult(JsonReader reader, Void config) throws IOException {
@@ -127,6 +142,10 @@ public class MovieIdParser extends JSONStreamParser<MovieTags, Void> {
                 case KEY_RUNTIME:
                     result.setRuntime(reader.nextLong(), TimeUnit.MINUTES);
                     break;
+//                case KEY_TAGLINE:
+//                    saveTaglineToFile(result.getId(), reader.nextString());
+//                    //result.setTagline(reader.nextString());
+//                    break;
                 default:
                     reader.skipValue();
                     break;
@@ -137,6 +156,21 @@ public class MovieIdParser extends JSONStreamParser<MovieTags, Void> {
 
         return result;
     }
+
+//    private void saveTaglineToFile(long id, String tagline) {
+//        try
+//        {
+//            File taglineFile = new File()
+//            String filename= "taglines.txt";
+//            FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+//            fw.write(id+":"+tagline+"\n");//appends the string to the file
+//            fw.close();
+//        }
+//        catch(IOException ioe)
+//        {
+//            System.err.println("IOException: " + ioe.getMessage());
+//        }
+//    }
 
     private static void readGenres(JsonReader reader, MovieTags target) throws IOException {
         reader.beginArray();
@@ -196,7 +230,8 @@ public class MovieIdParser extends JSONStreamParser<MovieTags, Void> {
                     readActors(reader, target);
                     break;
                 case KEY_CREW:
-                    readDirectors(reader, target);
+                    //readDirectors(reader, target);
+                    readCrew(reader,target);
                     break;
                 default:
                     reader.skipValue();
@@ -205,20 +240,32 @@ public class MovieIdParser extends JSONStreamParser<MovieTags, Void> {
         reader.endObject();
     }
 
-    private static void readDirectors(JsonReader reader, MovieTags target) throws IOException {
+//    private static void readDirectors(JsonReader reader, MovieTags target) throws IOException {
+//        reader.beginArray();
+//        while (hasNextSkipNull(reader)) {
+//            String item = readDirector(reader);
+//            target.addDirectorIfAbsent(item);
+//        }
+//        reader.endArray();
+//    }
+
+    private static void readCrew(JsonReader reader, MovieTags target) throws IOException {
         reader.beginArray();
         while (hasNextSkipNull(reader)) {
-            String item = readDirector(reader);
+            //String item = readDirector(reader);
+            String item = readEachCrew(reader);
             target.addDirectorIfAbsent(item);
         }
         reader.endArray();
     }
 
-    private static String readDirector(JsonReader reader) throws IOException {
+    private static String readEachCrew(JsonReader reader) throws IOException {
         reader.beginObject();
         String name;
         String personName = null;
         boolean isDirector = false;
+        //boolean isProducer = false;
+        //boolean isWriter = false;
         while ((name = getNextNotNullName(reader)) != null) {
             switch(MATCHER.match(name)) {
                 case KEY_NAME:
@@ -227,6 +274,10 @@ public class MovieIdParser extends JSONStreamParser<MovieTags, Void> {
                 case KEY_JOB:
                     if (DIRECTOR.equals(reader.nextString()))
                         isDirector = true;
+                    //else if (PRODUCER.equals(reader.nextString()))
+                    //    isProducer = true;
+                  //  else if (WRITER.equals(reader.nextString()))
+                  //      isWriter = true;
                     break;
                 default:
                     reader.skipValue();
@@ -235,6 +286,27 @@ public class MovieIdParser extends JSONStreamParser<MovieTags, Void> {
         reader.endObject();
         return isDirector ? personName : null;
     }
+//    private static String readDirector(JsonReader reader) throws IOException {
+//        reader.beginObject();
+//        String name;
+//        String personName = null;
+//        boolean isDirector = false;
+//        while ((name = getNextNotNullName(reader)) != null) {
+//            switch(MATCHER.match(name)) {
+//                case KEY_NAME:
+//                    personName = reader.nextString();
+//                    break;
+//                case KEY_JOB:
+//                    if (DIRECTOR.equals(reader.nextString()))
+//                        isDirector = true;
+//                    break;
+//                default:
+//                    reader.skipValue();
+//            }
+//        }
+//        reader.endObject();
+//        return isDirector ? personName : null;
+//    }
 
     //START SAMSUNG 5.0 MESS
     static int skipValueHelper = -1;

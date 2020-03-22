@@ -35,7 +35,7 @@ import java.util.Locale;
 
 public class ScraperImage {
 
-        private static final String TAG = "ScraperImage";
+    private static final String TAG = "ScraperImage";
     private static final boolean DBG = false;
     private static final boolean DBG2 = false;
 

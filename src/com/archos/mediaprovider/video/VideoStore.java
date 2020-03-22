@@ -207,6 +207,9 @@ public final class VideoStore {
          */
         public static final String TITLE = "title";
 
+        //r
+        public static final String TAGLINE = "tagline";
+
         /**
          * The time the file was added to the media provider
          * Units are seconds since 1970.
@@ -1097,6 +1100,14 @@ public final class VideoStore {
              * MediaScraper: Season number of an episode
              * <P>TYPE: <code>int</code> or <code>null</code> if not a show / episode
              */
+
+            //r
+            public static final String SCRAPER_TAGLINE = "scraper_tagline";
+            public static final String SCRAPER_M_TAGLINE = "m_tagline";
+            public static final String SCRAPER_S_TAGLINE = "m_tagline";
+            public static final String SCRAPER_E_TAGLINE = "m_tagline";
+
+
             public static final String SCRAPER_E_SEASON = "e_season";
             /**
              * MediaScraper: Episode number of an episode
@@ -1496,6 +1507,9 @@ public final class VideoStore {
              * <P> Type: INTEGER</P>
              */
             public static final String AUTOSCRAPER_STATUS = "autoscrape_status";
+
+
+
         }
 
         public static final class Media implements VideoColumns {

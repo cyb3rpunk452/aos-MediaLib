@@ -107,8 +107,15 @@ public class MovieTags extends VideoTags {
 
         values.put(ScraperStore.Movie.ACTORS_FORMATTED, getActorsFormatted());
         values.put(ScraperStore.Movie.DIRECTORS_FORMATTED, getDirectorsFormatted());
+       // values.put(ScraperStore.Movie.PRODUCERS_FORMATTED, getProducersFormatted());
+      //  values.put(ScraperStore.Movie.WRITERS_FORMATTED, getWritersFormatted());
         values.put(ScraperStore.Movie.GERNES_FORMATTED, getGenresFormatted());
         values.put(ScraperStore.Movie.STUDIOS_FORMATTED, getStudiosFormatted());
+
+
+
+        //r
+        values.put(ScraperStore.Movie.TAGLINE,getTagline());
 
         // build list of operations
         Builder cop = null;

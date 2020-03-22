@@ -4,7 +4,7 @@
     <style name="ArchosTheme" parent="@android:style/Theme.Material">
         <item name="android:actionBarStyle">@style/Widget.Material.ActionBar.Archos</item>
         <item name="android:colorPrimary">@color/lightblue500</item>
-        <item name="android:colorPrimaryDark">#002642</item>
+        <item name="android:colorPrimaryDark">#001321</item>
         <item name="android:colorAccent">@color/lightblue400</item>
         <item name="android:navigationBarColor">#001b30</item>
         <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>

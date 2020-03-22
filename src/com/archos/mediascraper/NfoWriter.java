@@ -109,6 +109,10 @@ public class NfoWriter {
             textTag(serializer, "rating", tag.getRating());
             textTag(serializer, "year", tag.getYear());
             textTag(serializer, "outline", tag.getPlot());
+
+            //r
+            textTag(serializer, "tagline", tag.getTagline());
+
             textTag(serializer, "runtime", tag.getRuntime(TimeUnit.MINUTES));
             textTag(serializer, "lastplayed", tag.getLastPlayed(TimeUnit.SECONDS));
             textTag(serializer, "bookmark", tag.getBookmark());
